@@ -1,3 +1,15 @@
+/*
+User stories:
+
+- [x] Able to enter texts up to 140 chars
+- [ ] Able to post
+- [x] Able to know what is a number of rest chars we can write
+- [x] Able to know we can post by disabled post button
+- [ ] Able to know we are posting now
+- [ ] Able to know tweeting is complete
+- [ ] Able to know the error of duplicated content to tweet
+*/
+
 import UIKit
 import Then
 import SnapKit
@@ -77,9 +89,8 @@ class TweetViewController: UIViewController, View {
 
 private let MAX_TEXT_LENGTH = 140
 
-func tweet() -> Completable {
-    return Completable.empty()
-        .delay(1, scheduler: SerialDispatchQueueScheduler(internalSerialQueueName: "tweet"))
+func tweet() -> Single<Bool> {
+    return Single.just(true).delay(1, scheduler: SerialDispatchQueueScheduler(internalSerialQueueName: "tweet"))
 }
 
 class TweetReactor: Reactor {
@@ -117,8 +128,7 @@ class TweetReactor: Reactor {
         case .tweet:
             return Observable.concat([
                 Observable.just(Mutation.setTweeting(true)),
-                tweet()
-                    .asObservable()
+                tweet().asObservable()
                     .map { _ in
                         self.completedRelay.onNext(())
                         return Mutation.setTweeting(false)
