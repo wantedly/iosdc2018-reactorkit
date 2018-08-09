@@ -7,6 +7,7 @@ PODS:
   - RxSwift (4.2.0)
   - SnapKit (4.0.0)
   - Then (2.3.0)
+  - "UITextView+Placeholder (1.2.1)"
 
 DEPENDENCIES:
   - ReactorKit
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - RxSwift
   - SnapKit
   - Then
+  - "UITextView+Placeholder"
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -24,6 +26,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - Then
+    - "UITextView+Placeholder"
 
 SPEC CHECKSUMS:
   ReactorKit: 26470a9eff5094fae909a30af0be7cd0cf8a182d
@@ -32,7 +35,8 @@ SPEC CHECKSUMS:
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
+  "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
-PODFILE CHECKSUM: da93d3184e4fa1d57712ef41480d0c77990774a9
+PODFILE CHECKSUM: bbad684543f9f7385a58d9eac664f425d794e137
 
 COCOAPODS: 1.5.3
