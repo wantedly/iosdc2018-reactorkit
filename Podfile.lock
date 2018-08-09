@@ -1,0 +1,38 @@
+PODS:
+  - ReactorKit (1.1.0):
+    - RxSwift (>= 4.0.0)
+  - Reveal-SDK (17)
+  - RxCocoa (4.2.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.2.0)
+  - SnapKit (4.0.0)
+  - Then (2.3.0)
+
+DEPENDENCIES:
+  - ReactorKit
+  - Reveal-SDK
+  - RxCocoa
+  - RxSwift
+  - SnapKit
+  - Then
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ReactorKit
+    - Reveal-SDK
+    - RxCocoa
+    - RxSwift
+    - SnapKit
+    - Then
+
+SPEC CHECKSUMS:
+  ReactorKit: 26470a9eff5094fae909a30af0be7cd0cf8a182d
+  Reveal-SDK: a6df49f47319bd19a110c960c498af32df72c0af
+  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
+  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
+
+PODFILE CHECKSUM: da93d3184e4fa1d57712ef41480d0c77990774a9
+
+COCOAPODS: 1.5.3
