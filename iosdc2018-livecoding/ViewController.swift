@@ -5,7 +5,7 @@ User stories:
 - [ ] Able to post
 - [x] Able to know what is a number of rest chars we can write
 - [x] Able to know we can post by disabled post button
-- [ ] Able to know we are posting now
+- [x] Able to know we are posting now
 - [ ] Able to know tweeting is complete
 - [ ] Able to know the error of duplicated content to tweet
 */
@@ -42,6 +42,9 @@ class TweetViewController: UIViewController, View {
     private let remainsLabel = UILabel().then {
         $0.textAlignment = .right
     }
+    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray).then {
+        $0.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+    }
 
     var disposeBag = DisposeBag()
 
@@ -55,6 +58,10 @@ class TweetViewController: UIViewController, View {
             $0.addArrangedSubview(textView)
             $0.addArrangedSubview(remainsLabel)
         })
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         stackView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -73,6 +80,12 @@ class TweetViewController: UIViewController, View {
             .disposed(by: disposeBag)
 
         // State
+        reactor.state
+            .map { $0.tweeting }
+            .distinctUntilChanged()
+            .bind(to: activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+
         reactor.state
             .map { $0.tweetButtonEnabled }
             .distinctUntilChanged()
