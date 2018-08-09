@@ -128,14 +128,14 @@
 			isa = PBXGroup;
 			children = (
 				DDAE3419211C005D00B8B0D3 /* AppDelegate.swift */,
-				DDAE341B211C005D00B8B0D3 /* ViewController.swift */,
-				DDAE341D211C005D00B8B0D3 /* Main.storyboard */,
 				DDAE3420211C005E00B8B0D3 /* Assets.xcassets */,
-				DDAE3422211C005E00B8B0D3 /* LaunchScreen.storyboard */,
 				DDAE3425211C005E00B8B0D3 /* Info.plist */,
-				DD7200CB211C24C200641BCA /* TwitterService.swift */,
+				DDAE3422211C005E00B8B0D3 /* LaunchScreen.storyboard */,
+				DDAE341D211C005D00B8B0D3 /* Main.storyboard */,
 				DD7200CD211C25D900641BCA /* TweetReactor.swift */,
 				DD7200CF211C261B00641BCA /* TweetViewController.swift */,
+				DD7200CB211C24C200641BCA /* TwitterService.swift */,
+				DDAE341B211C005D00B8B0D3 /* ViewController.swift */,
 			);
 			path = "iosdc2018-livecoding";
 			sourceTree = "<group>";
