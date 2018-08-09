@@ -6,7 +6,7 @@ User stories:
 - [x] Able to know what is a number of rest chars we can write
 - [x] Able to know we can post by disabled post button
 - [x] Able to know we are posting now
-- [ ] Able to know tweeting is complete
+- [x] Able to know tweeting is complete
 - [ ] Able to know the error of duplicated content to tweet
 */
 
@@ -96,6 +96,17 @@ class TweetViewController: UIViewController, View {
             .map { "残り: \($0.numberOfTextCountRemains)文字" }
             .distinctUntilChanged()
             .bind(to: remainsLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        // Relay
+        reactor.completedRelay
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                let alert = UIAlertController(title: nil, message: "Tweet successfully", preferredStyle: .alert).then {
+                    $0.addAction(UIAlertAction(title: "OK", style: .default))
+                }
+                self?.present(alert, animated: true)
+            })
             .disposed(by: disposeBag)
     }
 }
