@@ -2,12 +2,12 @@
 User stories:
 
 - [x] Able to enter texts up to 140 chars
-- [ ] Able to post
+- [x] Able to post
 - [x] Able to know what is a number of rest chars we can write
 - [x] Able to know we can post by disabled post button
 - [x] Able to know we are posting now
 - [x] Able to know tweeting is complete
-- [ ] Able to know the error of duplicated content to tweet
+- [x] Able to know the error of duplicated content to tweet
 */
 
 import UIKit
@@ -108,13 +108,41 @@ class TweetViewController: UIViewController, View {
                 self?.present(alert, animated: true)
             })
             .disposed(by: disposeBag)
+
+        reactor.errorRelay
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                let alert = UIAlertController(title: nil, message: $0.localizedDescription, preferredStyle: .alert).then {
+                    $0.addAction(UIAlertAction(title: "OK", style: .default))
+                }
+                self?.present(alert, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
 private let MAX_TEXT_LENGTH = 140
 
-func tweet() -> Single<Bool> {
-    return Single.just(true).delay(1, scheduler: SerialDispatchQueueScheduler(internalSerialQueueName: "tweet"))
+private let scheduler = SerialDispatchQueueScheduler(internalSerialQueueName: "tweet")
+
+private var lastTweetedText: String? = nil
+
+private enum TweetError: LocalizedError {
+    case duplicated
+    var errorDescription: String? {
+        switch self {
+        case .duplicated:
+            return "Your tweet is duplicated with the last one."
+        }
+    }
+}
+
+func tweet(text: String) -> Single<Bool> {
+    if lastTweetedText == text {
+        return Single.error(TweetError.duplicated).delay(1, scheduler: scheduler)
+    }
+    lastTweetedText = text
+    return Single.just(true).delay(1, scheduler: scheduler)
 }
 
 class TweetReactor: Reactor {
@@ -152,7 +180,7 @@ class TweetReactor: Reactor {
         case .tweet:
             return Observable.concat([
                 Observable.just(Mutation.setTweeting(true)),
-                tweet().asObservable()
+                tweet(text: currentState.text).asObservable()
                     .map { _ in
                         self.completedRelay.onNext(())
                         return Mutation.setTweeting(false)
