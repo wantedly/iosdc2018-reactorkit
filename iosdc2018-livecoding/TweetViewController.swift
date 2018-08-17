@@ -62,4 +62,26 @@ class TweetViewController: UIViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+
+    private func showCompletedAlert() {
+        let alert = UIAlertController(
+            title: "Tweet successfully",
+            message: nil,
+            preferredStyle: .alert
+        ).then {
+            $0.addAction(UIAlertAction(title: "OK", style: .default))
+        }
+        present(alert, animated: true)
+    }
+
+    private func showErrorAlert(_ error: Error) {
+        let alert = UIAlertController(
+            title: "Error",
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        ).then {
+            $0.addAction(UIAlertAction(title: "OK", style: .default))
+        }
+        present(alert, animated: true)
+    }
 }

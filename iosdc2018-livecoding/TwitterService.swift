@@ -19,9 +19,14 @@ class TwitterService {
 
     func tweet(text: String) -> Single<Bool> {
         if lastTweetedText == text {
-            return Single.just(false).delay(1, scheduler: scheduler).flatMap { _ in Single.error(TweetError.duplicated) }
+            return Single.just(false)
+                .delay(1, scheduler: scheduler)
+                .flatMap { _ in Single.error(TweetError.duplicated) }
+                .do(onError: { _ in NSLog("Error: \(text)") })
         }
         lastTweetedText = text
-        return Single.just(true).delay(1, scheduler: scheduler)
+        return Single.just(true)
+            .delay(1, scheduler: scheduler)
+            .do(onSuccess: { _ in NSLog("Succeeded: \(text)") })
     }
 }
