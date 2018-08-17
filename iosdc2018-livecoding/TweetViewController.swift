@@ -11,16 +11,18 @@
  */
 
 import UIKit
-import RxSwift
-import RxCocoa
-import ReactorKit
 import Then
 import UITextView_Placeholder
 import SnapKit
 
 class TweetViewController: UIViewController {
 
-    private let tweetButton = UIBarButtonItem(title: "Tweet", style: .done, target: nil, action: nil)
+    private let tweetButton = UIBarButtonItem(
+        title: "Tweet",
+        style: .done,
+        target: nil,
+        action: nil
+    )
     private let stackView = UIStackView().then {
         $0.axis = .vertical
         $0.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
@@ -30,13 +32,12 @@ class TweetViewController: UIViewController {
         $0.placeholder = "いまどうしてる？"
     }
     private let remainsLabel = UILabel().then {
+        $0.text = "残りN文字"
         $0.textAlignment = .right
     }
     private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray).then {
         $0.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
     }
-
-    var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
