@@ -1,13 +1,13 @@
 /*
  User stories:
 
- - [ ] Able to enter texts up to 140 chars
- - [ ] Able to post
- - [ ] Able to know what is a number of rest chars we can write
- - [ ] Able to know we can post by disabled post button
- - [ ] Able to know we are posting now
- - [ ] Able to know tweeting is complete
- - [ ] Able to know the error of duplicated content to tweet
+ * [ ] 140文字まで文字を書くことができ、今の残り文字数が分かる
+ * [ ] 文字数が1~140の時のみ投稿できることが分かる
+ * [ ] 現在入力されているテキストを投稿できる
+ * [ ] 投稿を開始してから完了するまで投稿中であることが分かる
+ * [ ] 投稿が正常に完了したことが分かる
+ * [ ] 2回連続で同じ内容の投稿した時にエラーになり、そのエラー内容が分かる
+
  */
 
 import UIKit
