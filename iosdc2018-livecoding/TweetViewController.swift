@@ -1,12 +1,12 @@
 /*
  User stories:
 
- * [ ] 140文字まで文字を書くことができ、今の残り文字数が分かる
- * [ ] 文字数が1~140の時のみ投稿できることが分かる
- * [ ] 現在入力されているテキストを投稿できる
- * [ ] 投稿を開始してから完了するまで投稿中であることが分かる
- * [ ] 投稿が正常に完了したことが分かる
- * [ ] 2回連続で同じ内容の投稿した時にエラーになり、そのエラー内容が分かる
+ * [x] 140文字まで文字を書くことができ、今の残り文字数が分かる
+ * [x] 文字数が1~140の時のみ投稿できることが分かる
+ * [x] 現在入力されているテキストを投稿できる
+ * [x] 投稿を開始してから完了するまで投稿中であることが分かる
+ * [x] 投稿が正常に完了したことが分かる
+ * [x] 2回連続で同じ内容の投稿した時にエラーになり、そのエラー内容が分かる
 
  */
 
@@ -14,8 +14,11 @@ import UIKit
 import Then
 import UITextView_Placeholder
 import SnapKit
+import RxSwift
+import ReactorKit
+import RxCocoa
 
-class TweetViewController: UIViewController {
+class TweetViewController: UIViewController, View {
 
     private let tweetButton = UIBarButtonItem(
         title: "Tweet",
@@ -39,6 +42,8 @@ class TweetViewController: UIViewController {
         $0.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
     }
 
+    var disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,6 +66,49 @@ class TweetViewController: UIViewController {
         stackView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+
+    func bind(reactor: TweetReactor) {
+        // Action
+        textView.rx.text.orEmpty
+            .map { Reactor.Action.updateText($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        tweetButton.rx.tap
+            .map { Reactor.Action.submit }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        // State
+        reactor.state
+            .map { "残り\($0.remainingTextCount)文字" }
+            .distinctUntilChanged()
+            .bind(to: remainsLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isTweetButtonEnabled }
+            .distinctUntilChanged()
+            .bind(to: tweetButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isSubmitting }
+            .distinctUntilChanged()
+            .bind(to: activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+
+        // Relay
+        reactor.completedRelay
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in self?.showCompletedAlert() })
+            .disposed(by: disposeBag)
+
+        reactor.errorRelay
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in self?.showErrorAlert($0) })
+            .disposed(by: disposeBag)
     }
 
     private func showCompletedAlert() {

@@ -17,6 +17,7 @@
 		DDAE3424211C005E00B8B0D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDAE3422211C005E00B8B0D3 /* LaunchScreen.storyboard */; };
 		DDAE342F211C005E00B8B0D3 /* iosdc2018_livecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE342E211C005E00B8B0D3 /* iosdc2018_livecodingTests.swift */; };
 		DDAE343A211C005E00B8B0D3 /* iosdc2018_livecodingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE3439211C005E00B8B0D3 /* iosdc2018_livecodingUITests.swift */; };
+		DDB14739213921B600DB7822 /* TweetReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB14738213921B600DB7822 /* TweetReactor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		DDAE3435211C005E00B8B0D3 /* iosdc2018-livecodingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iosdc2018-livecodingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDAE3439211C005E00B8B0D3 /* iosdc2018_livecodingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosdc2018_livecodingUITests.swift; sourceTree = "<group>"; };
 		DDAE343B211C005E00B8B0D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDB14738213921B600DB7822 /* TweetReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetReactor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				DD7200CF211C261B00641BCA /* TweetViewController.swift */,
 				DD7200CB211C24C200641BCA /* TwitterService.swift */,
 				DDAE341B211C005D00B8B0D3 /* ViewController.swift */,
+				DDB14738213921B600DB7822 /* TweetReactor.swift */,
 			);
 			path = "iosdc2018-livecoding";
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				DDAE341C211C005D00B8B0D3 /* ViewController.swift in Sources */,
 				DDAE341A211C005D00B8B0D3 /* AppDelegate.swift in Sources */,
 				DD7200D0211C261B00641BCA /* TweetViewController.swift in Sources */,
+				DDB14739213921B600DB7822 /* TweetReactor.swift in Sources */,
 				DD7200CC211C24C200641BCA /* TwitterService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
